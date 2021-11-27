@@ -28,9 +28,9 @@ license that can be found in the LICENSE file.
 			};
 		}
         let mod, inst;
+        const go = new Go();
 
         async function load(scriptName) {
-            const go = new Go();
             document.getElementById("runButton").disabled = true;
             WebAssembly.instantiateStreaming(fetch(scriptName), go.importObject).then((result) => {
                 mod = result.module;
