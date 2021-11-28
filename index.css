@@ -1,0 +1,72 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #ddd
+}
+
+h1 {
+    position: relative;
+    top: 5%;
+    left: 5%;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row {
+  border: 1px dotted grey;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+  background-color: #004700;
+}
+
+.box .column.content {
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.box .row.footer {
+  flex: 0 1 40px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.row2 {
+    height: 100%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#loaders {
+    background-color: #006666;
+    width: 14%;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+#runWindow {
+    background-color: #eee;
+    width: 84%;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+#title {
+    padding-left: 0;
+    padding-top: 0;
+}
+

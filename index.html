@@ -4,55 +4,54 @@ Copyright 2018 The Go Authors. All rights reserved.
 Use of this source code is governed by a BSD-style
 license that can be found in the LICENSE file.
 -->
+<!--
+2021 Oakmound Studio, heavily modified from Go Authors' 
+source. 
+-->
 <html>
 
 <head>
 	<meta charset="utf-8">
-	<title>Go wasm</title>
+	<title>Oak Examples</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
-
-    <h1>WIP: Oak examples</h1>
-	<!--
-	Add the following polyfill for Microsoft Edge 17/18 support:
-	<script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
-	(see https://caniuse.com/#feat=textencoder)
-	-->
 	<script src="wasm_exec.js"></script>
-	<script>
-		if (!WebAssembly.instantiateStreaming) { // polyfill
-			WebAssembly.instantiateStreaming = async (resp, importObject) => {
-				const source = await (await resp).arrayBuffer();
-				return await WebAssembly.instantiate(source, importObject);
-			};
-		}
-        let mod, inst;
-        const go = new Go();
+    <script src="index.js"></script>
 
-        async function load(scriptName) {
-            document.getElementById("runButton").disabled = true;
-            WebAssembly.instantiateStreaming(fetch(scriptName), go.importObject).then((result) => {
-                mod = result.module;
-                inst = result.instance;
-                document.getElementById("runButton").disabled = false;
-            }).catch((err) => {
-                console.error(err);
-            });
-        }
-
-		async function run() {
-			console.clear();
-			await go.run(inst);
-			inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
-		}
-	</script>
-
-    <li>
-        <button onClick="load('wasm/bezier.wasm')">Load Bezier</button>
-    </li>
-
-	<button onClick="run();" id="runButton" disabled>Run</button>
+    <div class="box">
+        <div class="row header">
+            <h1>WIP: Oak Examples</h1>
+        </div>
+        <div class="row2"> 
+            <div class="column content" id="loaders">
+                <button onClick="load('wasm/bezier.wasm')" id="loadButton">Load Bezier</button><br>
+                <button onClick="load('wasm/collision.wasm')" id="loadButton">Load Collision Demo</button><br>
+                <button onClick="load('wasm/flappy-bird.wasm')" id="loadButton">Load Flappy Bird</button><br>
+                <button onClick="load('wasm/keyboard.wasm')" id="loadButton">Load Keyboard Visualizer</button><br>
+                <button onClick="load('wasm/mouse.wasm')" id="loadButton">Load Mouse Visualizer</button><br>
+                <button onClick="load('wasm/platformer.wasm')" id="loadButton">Load Platformer</button><br>
+                <button onClick="load('wasm/radar.wasm')" id="loadButton">Load Radar Demo</button><br>
+                <button onClick="load('wasm/rooms.wasm')" id="loadButton">Load Rooms Demo</button><br>
+                <button onClick="load('wasm/slide.wasm')" id="loadButton">Load Slideshow</button><br>
+                <button onClick="load('wasm/sprite-demo.wasm')" id="loadButton">Load Sprite Demo</button><br>
+                <button onClick="load('wasm/text-demo-1.wasm')" id="loadButton">Load Text Demo 1</button><br>
+                <button onClick="load('wasm/text-demo-2.wasm')" id="loadButton">Load Text Demo 2</button><br>
+                <button onClick="load('wasm/top-down-shooter.wasm')" id="loadButton">Load Top Down Shooter</button><br>
+                <button onClick="load('wasm/zooming.wasm')" id="loadButton">Load Zooming Demo</button><br>
+                <h4 id="errorText" hidden>Error</h4>
+            </div>
+            <div class="column content" id="runWindow">
+                <button onClick="run();" id="runButton" hidden>Run</button>
+            </div>
+        </div>
+      </div>
+    
+    <h3 color=red hidden id="errorText">Error Text</h3>
 </body>
 
 </html>
